@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/OnlineEnterprice.Data/bin/Debug/netcoreapp2.2
+/OnlineEnterprice.Data/obj/Debug/netcoreapp2.2
+/OnlineEnterprice.Data/obj
+/OnlineEnterprice.Domain/bin/Debug/netcoreapp2.2
+/OnlineEnterprice.Domain/obj/Debug/netcoreapp2.2
+/OnlineEnterprice.Domain/obj
+/OnlineEnterprise.Web/obj/Debug/netcoreapp2.2
+/OnlineEnterprise.Web/bin/Debug/netcoreapp2.2
+/OnlineEnterprise.Web/obj
