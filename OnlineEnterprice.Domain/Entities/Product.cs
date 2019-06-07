@@ -15,6 +15,7 @@ namespace OnlineEnterprice.Domain.Entities
         public int Weight { get; set; }
         public int Ammount { get; set; }
         public decimal Price { get; set; }
+
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Category { get; set; }
