@@ -12,3 +12,9 @@
 /OnlineEnterprise.Web/obj/Debug/netcoreapp2.2
 /OnlineEnterprise.Web/bin/Debug/netcoreapp2.2
 /OnlineEnterprise.Web/obj
+/OnlineEnterprice.Domain/bin/Release/netcoreapp2.2
+/OnlineEnterprise.Tests/bin/Debug/netcoreapp2.2
+/OnlineEnterprise.Tests/bin/Release/netcoreapp2.2
+/OnlineEnterprise.Tests/obj
+/OnlineEnterprise.Web/bin/Release/netcoreapp2.2
+/OnlineEnterprice.Data/bin/Release/netcoreapp2.2

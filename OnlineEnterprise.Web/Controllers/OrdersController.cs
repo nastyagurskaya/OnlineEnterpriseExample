@@ -19,6 +19,9 @@ namespace OnlineEnterprise.Web.Controllers
             _orderRepository = orderRepository;
         }
 
+        [HttpGet]
+        public IEnumerable<Order> Get() => _orderRepository.Get();
+
         [HttpGet("{id:length(24)}", Name = "GetOrder")]
         public ActionResult<Order> Get(string id)
         {
@@ -38,6 +41,36 @@ namespace OnlineEnterprise.Web.Controllers
             _orderRepository.Create(order);
 
             return CreatedAtRoute("GetOrder", new { id = order.Id.ToString() }, order);
+        }
+
+        [HttpPut("{id:length(24)}")]
+        public IActionResult Update(string id, Order orderIn)
+        {
+            var order = _orderRepository.Get(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _orderRepository.Update(id, orderIn);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id)
+        {
+            var order = _orderRepository.Get(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _orderRepository.Remove(order.Id);
+
+            return NoContent();
         }
     }
 }

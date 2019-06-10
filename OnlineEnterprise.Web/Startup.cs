@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using OnlineEnterprice.Data.Settings;
+using OnlineEnterprise.Data.Interfaces;
 using OnlineEnterprise.Data.Services;
 
 namespace OnlineEnterprise.Web
@@ -36,7 +37,7 @@ namespace OnlineEnterprise.Web
             services.AddSingleton<IShopDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<ShopDatabaseSettings>>().Value);
 
-            services.AddSingleton<ProductRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
             services.AddSingleton<OrderRepository>();
             services.AddSingleton<CategoryRepository>();
 

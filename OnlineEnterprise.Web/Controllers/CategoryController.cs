@@ -19,6 +19,9 @@ namespace OnlineEnterprise.Web.Controllers
             _categoryRepository = categoryRepository;
         }
 
+        [HttpGet]
+        public IEnumerable<Category> Get() => _categoryRepository.Get();
+
         [HttpGet("{id:length(24)}", Name = "GetCategory")]
         public ActionResult<Category> Get(string id)
         {
@@ -38,6 +41,36 @@ namespace OnlineEnterprise.Web.Controllers
             _categoryRepository.Create(category);
 
             return CreatedAtRoute("GetCategory", new { id = category.Id.ToString() }, category);
+        }
+
+        [HttpPut("{id:length(24)}")]
+        public IActionResult Update(string id, Category categoryIn)
+        {
+            var book = _categoryRepository.Get(id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            _categoryRepository.Update(id, categoryIn);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id)
+        {
+            var category = _categoryRepository.Get(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            _categoryRepository.Remove(category.Id);
+
+            return NoContent();
         }
     }
 }

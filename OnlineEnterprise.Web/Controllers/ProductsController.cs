@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using OnlineEnterprice.Domain.Entities;
-using OnlineEnterprise.Data.Services;
+using OnlineEnterprise.Data.Interfaces;
 
 namespace OnlineEnterprise.Web.Controllers
 {
@@ -8,12 +9,15 @@ namespace OnlineEnterprise.Web.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly ProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
-        public ProductsController(ProductRepository productRepository)
+        public ProductsController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
+
+        [HttpGet]
+        public IEnumerable<Product> Get() => _productRepository.Get();
 
         [HttpGet("{id:length(24)}", Name = "GetProduct")]
         public ActionResult<Product> Get(string id)
@@ -29,11 +33,41 @@ namespace OnlineEnterprise.Web.Controllers
         }
 
         [HttpPost(Name = "CreateProduct")]
-        public ActionResult<Order> Create([FromBody]Product product)
+        public ActionResult<Product> Create([FromBody]Product product)
         {
             _productRepository.Create(product);
 
             return CreatedAtRoute("GetProduct", new { id = product.Id.ToString() }, product);
+        }
+
+        [HttpPut("{id:length(24)}")]
+        public IActionResult Update(string id, Product productIn)
+        {
+            var book = _productRepository.Get(id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            _productRepository.Update(id, productIn);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id)
+        {
+            var product = _productRepository.Get(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            _productRepository.Remove(product.Id);
+
+            return NoContent();
         }
     }
 }

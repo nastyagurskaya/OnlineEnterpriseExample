@@ -4,10 +4,11 @@ using System.Text;
 using MongoDB.Driver;
 using OnlineEnterprice.Data.Settings;
 using OnlineEnterprice.Domain.Entities;
+using OnlineEnterprise.Data.Interfaces;
 
 namespace OnlineEnterprise.Data.Services
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly IMongoCollection<Product> _products;
 
