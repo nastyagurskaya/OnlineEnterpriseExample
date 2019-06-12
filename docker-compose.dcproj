@@ -3,10 +3,10 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>0a338f49-b81a-4bf3-a900-06308ed40d44</ProjectGuid>
+    <ProjectGuid>8963f336-7441-494d-ba3e-e678e948875f</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/api/values</DockerServiceUrl>
-    <DockerServiceName>onlineenterpriseexmpl</DockerServiceName>
+    <DockerServiceName>onlineenterprise.web</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

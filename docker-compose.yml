@@ -1,15 +1,8 @@
 version: '3.4'
 
 services:
-  onlineenterpriseexmpl:
-    image: ${DOCKER_REGISTRY}onlineenterpriseexmpl
-    build:
-      context: .
-      dockerfile: OnlineEnterpriseExmpl/Dockerfile
-
   onlineenterprise.web:
-    image: ${DOCKER_REGISTRY}onlineenterpriseweb
+    image: ${DOCKER_REGISTRY-}onlineenterpriseweb
     build:
       context: .
-      dockerfile: ../OnlineEnterprise.Web/Dockerfile
-
+      dockerfile: OnlineEnterprise.Web/Dockerfile
