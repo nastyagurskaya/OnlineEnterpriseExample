@@ -1,8 +1,20 @@
 version: '3.4'
 
 services:
-  onlineenterprise.web:
-    image: ${DOCKER_REGISTRY-}onlineenterpriseweb
+  onlineenterpriseorders.web:
+    image: ${DOCKER_REGISTRY-}onlineenterpriseordersweb
     build:
       context: .
-      dockerfile: OnlineEnterprise.Web/Dockerfile
+      dockerfile: OnlineEnterpriseOrders.Web/Dockerfile
+
+  onlineenterprisecategories.web:
+    image: ${DOCKER_REGISTRY-}onlineenterprisecategoriesweb
+    build:
+      context: .
+      dockerfile: OnlineEnterpriseCategories.Web/Dockerfile
+
+  onlineenterpriseproducts.web:
+    image: ${DOCKER_REGISTRY-}onlineenterpriseproductsweb
+    build:
+      context: .
+      dockerfile: OnlineEnterpriseProducts.Web/Dockerfile

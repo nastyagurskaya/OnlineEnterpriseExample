@@ -11,7 +11,7 @@ namespace OnlineEnterprice.Domain.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public IList<ObjectId> Products { get; set; }
+        public IList<string> Products { get; set; }
         public string Address { get; set; }
     }
 }

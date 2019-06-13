@@ -1,14 +1,54 @@
 version: '3.4'
 
 services:
-  onlineenterprise.web:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_HTTPS_PORT=44363
-    ports:
-      - "51490:80"
-      - "44363:443"
-    volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+    onlineenterpriseorders.web:
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://0.0.0.0:80
+        ports:
+            - '51491:80'
+        #    - '44364:443'
+        #volumes:
+        #    - '${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro'
+        #    - '${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro'
+    onlineenterprisecategories.web:
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://0.0.0.0:80
+        ports:
+            - '51492:80'
+#        volumes:
+#            - '${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro'
+#            - '${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro'
+    onlineenterpriseproducts.web:
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://0.0.0.0:80
+        ports:
+            - '51490:80'
+
+    mongo:
+        image: mongo
+        restart: always
+        environment:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
+        ports:
+          - 27017:27017
+
+
+    mongo-express:
+        image: mongo-express
+        restart: always
+        ports:
+          - 8081:8081
+       # environment:
+          #ME_CONFIG_MONGODB_ADMINUSERNAME: root
+          #ME_CONFIG_MONGODB_ADMINPASSWORD: example
+        depends_on:
+          - mongo
+#            - '44363:443'
+ #       volumes:
+ #           - '${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro'
+ #           - '${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro'
+

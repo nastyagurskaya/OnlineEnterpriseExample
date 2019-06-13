@@ -4,10 +4,11 @@ using System.Text;
 using MongoDB.Driver;
 using OnlineEnterprice.Data.Settings;
 using OnlineEnterprice.Domain.Entities;
+using OnlineEnterprise.Data.Interfaces;
 
 namespace OnlineEnterprise.Data.Services
 {
-    public class OrderRepository
+    public class OrderRepository : IMongoRepository<Order>
     {
         private readonly IMongoCollection<Order> _orders;
 
@@ -16,7 +17,7 @@ namespace OnlineEnterprise.Data.Services
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _orders = database.GetCollection<Order>(settings.OrderCollectionName);
+            _orders = database.GetCollection<Order>(settings.CollectionName);
         }
 
         public List<Order> Get() =>

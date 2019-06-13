@@ -1,0 +1,21 @@
+FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM microsoft/dotnet:2.2-sdk AS build
+WORKDIR /src
+COPY OnlineEnterpriseProducts.Web/OnlineEnterpriseProducts.Web.csproj OnlineEnterpriseProducts.Web/
+COPY OnlineEnterprice.Data/OnlineEnterprise.Data.csproj OnlineEnterprice.Data/
+COPY OnlineEnterprice.Domain/OnlineEnterprise.Domain.csproj OnlineEnterprice.Domain/
+RUN dotnet restore OnlineEnterpriseProducts.Web/OnlineEnterpriseProducts.Web.csproj
+COPY . .
+WORKDIR /src/OnlineEnterpriseProducts.Web
+RUN dotnet build OnlineEnterpriseProducts.Web.csproj -c Release -o /app
+
+FROM build AS publish
+RUN dotnet publish OnlineEnterpriseProducts.Web.csproj -c Release -o /app
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "OnlineEnterpriseProducts.Web.dll"]

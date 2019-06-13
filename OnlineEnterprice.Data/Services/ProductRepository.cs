@@ -8,7 +8,7 @@ using OnlineEnterprise.Data.Interfaces;
 
 namespace OnlineEnterprise.Data.Services
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : IMongoRepository<Product>
     {
         private readonly IMongoCollection<Product> _products;
 
@@ -17,7 +17,7 @@ namespace OnlineEnterprise.Data.Services
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _products = database.GetCollection<Product>(settings.ProductCollectionName);
+            _products = database.GetCollection<Product>(settings.CollectionName);
         }
 
         public List<Product> Get() =>

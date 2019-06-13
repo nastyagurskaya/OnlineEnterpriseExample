@@ -1,10 +1,8 @@
 ﻿using System;
 using NSubstitute;
 using NUnit.Framework;
-using OnlineEnterprice.Data.Settings;
 using OnlineEnterprice.Domain.Entities;
 using OnlineEnterprise.Data.Interfaces;
-using OnlineEnterprise.Data.Services;
 using OnlineEnterprise.Web.Controllers;
 
 namespace OnlineEnterprise.Tests
@@ -13,13 +11,13 @@ namespace OnlineEnterprise.Tests
     public class ProductsControllerTests
     {
         private ProductsController _productsController;
-        private IProductRepository _productRpository;
+        private IMongoRepository<Product> _productRpository;
         private string _id = "507f191e810c19729de860ea";
 
         [SetUp]
         public void SetUp()
         {
-            _productRpository = Substitute.For<IProductRepository>();
+            _productRpository = Substitute.For<IMongoRepository<Product>>();
             _productsController = new ProductsController(_productRpository);
         }
 

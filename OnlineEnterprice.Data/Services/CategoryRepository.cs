@@ -4,10 +4,11 @@ using System.Text;
 using MongoDB.Driver;
 using OnlineEnterprice.Data.Settings;
 using OnlineEnterprice.Domain.Entities;
+using OnlineEnterprise.Data.Interfaces;
 
 namespace OnlineEnterprise.Data.Services
 {
-    public class CategoryRepository
+    public class CategoryRepository : IMongoRepository<Category>
     {
 
         private readonly IMongoCollection<Category> _categories;
@@ -17,7 +18,7 @@ namespace OnlineEnterprise.Data.Services
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _categories = database.GetCollection<Category>(settings.CategoryCollectionName);
+            _categories = database.GetCollection<Category>(settings.CollectionName);
         }
 
         public List<Category> Get() =>

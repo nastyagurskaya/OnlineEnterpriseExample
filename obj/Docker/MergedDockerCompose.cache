@@ -1,19 +1,52 @@
 services:
-  onlineenterprise.web:
+  mongo:
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: root
+    image: mongo
+    ports:
+    - published: 27017
+      target: 27017
+    restart: always
+  mongo-express:
+    depends_on:
+    - mongo
+    image: mongo-express
+    ports:
+    - published: 8081
+      target: 8081
+    restart: always
+  onlineenterprisecategories.web:
     build:
       context: C:\Users\anduser\source\repos\OnlineEnterpriseExmpl
-      dockerfile: OnlineEnterprise.Web/Dockerfile
+      dockerfile: OnlineEnterpriseCategories.Web/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_HTTPS_PORT: '44363'
-      ASPNETCORE_URLS: https://+:443;http://+:80
-    image: onlineenterpriseweb
+      ASPNETCORE_URLS: http://0.0.0.0:80
+    image: onlineenterprisecategoriesweb
+    ports:
+    - published: 51492
+      target: 80
+  onlineenterpriseorders.web:
+    build:
+      context: C:\Users\anduser\source\repos\OnlineEnterpriseExmpl
+      dockerfile: OnlineEnterpriseOrders.Web/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+    image: onlineenterpriseordersweb
+    ports:
+    - published: 51491
+      target: 80
+  onlineenterpriseproducts.web:
+    build:
+      context: C:\Users\anduser\source\repos\OnlineEnterpriseExmpl
+      dockerfile: OnlineEnterpriseProducts.Web/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+    image: onlineenterpriseproductsweb
     ports:
     - published: 51490
       target: 80
-    - published: 44363
-      target: 443
-    volumes:
-    - C:\Users\anduser\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
-    - C:\Users\anduser\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
 version: '3.4'

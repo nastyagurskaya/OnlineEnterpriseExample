@@ -9,9 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineEnterprise.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineEnterprise.Tests", "OnlineEnterprise.Tests\OnlineEnterprise.Tests.csproj", "{6E7B35D1-3626-4594-BB8D-FE9A02BE6B94}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineEnterprise.Web", "OnlineEnterprise.Web\OnlineEnterprise.Web.csproj", "{A4134EB9-E28C-488E-B85D-71904CAA4268}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineEnterpriseProducts.Web", "OnlineEnterpriseProducts.Web\OnlineEnterpriseProducts.Web.csproj", "{E7AFCD7D-2777-4109-993C-A9CAB87BF2FB}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8963F336-7441-494D-BA3E-E678E948875F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineEnterpriseCategories.Web", "OnlineEnterpriseCategories.Web\OnlineEnterpriseCategories.Web.csproj", "{1187E6DD-01F3-4074-8890-1214329EB14B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineEnterpriseOrders.Web", "OnlineEnterpriseOrders.Web\OnlineEnterpriseOrders.Web.csproj", "{69E8EE0D-7FD5-4971-A3BB-9CF8316475F4}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{76000C44-5873-4FFB-83EE-067EAFC28A39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +35,22 @@ Global
 		{6E7B35D1-3626-4594-BB8D-FE9A02BE6B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E7B35D1-3626-4594-BB8D-FE9A02BE6B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E7B35D1-3626-4594-BB8D-FE9A02BE6B94}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4134EB9-E28C-488E-B85D-71904CAA4268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4134EB9-E28C-488E-B85D-71904CAA4268}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4134EB9-E28C-488E-B85D-71904CAA4268}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4134EB9-E28C-488E-B85D-71904CAA4268}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8963F336-7441-494D-BA3E-E678E948875F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8963F336-7441-494D-BA3E-E678E948875F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8963F336-7441-494D-BA3E-E678E948875F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8963F336-7441-494D-BA3E-E678E948875F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7AFCD7D-2777-4109-993C-A9CAB87BF2FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7AFCD7D-2777-4109-993C-A9CAB87BF2FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7AFCD7D-2777-4109-993C-A9CAB87BF2FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7AFCD7D-2777-4109-993C-A9CAB87BF2FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1187E6DD-01F3-4074-8890-1214329EB14B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1187E6DD-01F3-4074-8890-1214329EB14B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1187E6DD-01F3-4074-8890-1214329EB14B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1187E6DD-01F3-4074-8890-1214329EB14B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69E8EE0D-7FD5-4971-A3BB-9CF8316475F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69E8EE0D-7FD5-4971-A3BB-9CF8316475F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69E8EE0D-7FD5-4971-A3BB-9CF8316475F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69E8EE0D-7FD5-4971-A3BB-9CF8316475F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76000C44-5873-4FFB-83EE-067EAFC28A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76000C44-5873-4FFB-83EE-067EAFC28A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76000C44-5873-4FFB-83EE-067EAFC28A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76000C44-5873-4FFB-83EE-067EAFC28A39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
