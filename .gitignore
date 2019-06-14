@@ -18,3 +18,9 @@
 /OnlineEnterprise.Tests/obj
 /OnlineEnterprise.Web/bin/Release/netcoreapp2.2
 /OnlineEnterprice.Data/bin/Release/netcoreapp2.2
+/bin/Debug
+/obj/Debug
+/OnlineEnterpriseCategories.Web/bin/Debug/netcoreapp2.2
+/OnlineEnterpriseOrders.Web/bin/Debug/netcoreapp2.2
+/OnlineEnterpriseProducts.Web/bin/Debug/netcoreapp2.2
+/OnlineEnterpriseProducts.Web/obj/Container
