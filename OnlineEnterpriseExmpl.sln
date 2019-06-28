@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineEnterpriseOrders.Web"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{76000C44-5873-4FFB-83EE-067EAFC28A39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineEnterprise.IdentityServer", "OnlineEnterprise.IdentityServer\OnlineEnterprise.IdentityServer.csproj", "{6C3E7840-A3FB-4CA9-8A02-3E895E4D4C0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{76000C44-5873-4FFB-83EE-067EAFC28A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76000C44-5873-4FFB-83EE-067EAFC28A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76000C44-5873-4FFB-83EE-067EAFC28A39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C3E7840-A3FB-4CA9-8A02-3E895E4D4C0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C3E7840-A3FB-4CA9-8A02-3E895E4D4C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C3E7840-A3FB-4CA9-8A02-3E895E4D4C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C3E7840-A3FB-4CA9-8A02-3E895E4D4C0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

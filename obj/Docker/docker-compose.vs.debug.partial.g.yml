@@ -1,24 +1,42 @@
 version: '3.4'
 
 services:
+  onlineenterprise.identityserver:
+    image: onlineenterprise.identityserver:dev
+    build:
+      target: base
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_onlineenterprise.identityserver$
+    volumes:
+      - C:\Users\anduser\source\repos\OnlineEnterpriseExmpl\OnlineEnterprise.IdentityServer:/app
+      - C:\Users\anduser\vsdbg\vs2017u5:/remote_debugger:ro
+#$nuget_volume_mapping_onlineenterprise.identityserver$
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_onlineenterprise.identityserver$ "
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/bash -c \"if PID=$$(pidof -x dotnet); then kill $$PID; fi\""
+
   onlineenterprisecategories.web:
     image: onlineenterprisecategoriesweb:dev
     build:
       target: base
     environment:
       - DOTNET_USE_POLLING_FILE_WATCHER=1
-      - NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_onlineenterprisecategories.web$
     volumes:
       - C:\Users\anduser\source\repos\OnlineEnterpriseExmpl\OnlineEnterpriseCategories.Web:/app
       - C:\Users\anduser\vsdbg\vs2017u5:/remote_debugger:ro
-      - C:\Users\anduser\.nuget\packages\:/root/.nuget/packages:ro
-      - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:/root/.nuget/fallbackpackages:ro
+#$nuget_volume_mapping_onlineenterprisecategories.web$
     entrypoint: tail -f /dev/null
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  bin/Debug/netcoreapp2.2/OnlineEnterpriseCategories.Web.dll"
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_onlineenterprisecategories.web$ bin/Debug/netcoreapp2.2/OnlineEnterpriseCategories.Web.dll"
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "/bin/bash -c \"if PID=$$(pidof -x dotnet); then kill $$PID; fi\""
+
 
   onlineenterpriseorders.web:
     image: onlineenterpriseordersweb:dev
@@ -26,16 +44,15 @@ services:
       target: base
     environment:
       - DOTNET_USE_POLLING_FILE_WATCHER=1
-      - NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_onlineenterpriseorders.web$
     volumes:
       - C:\Users\anduser\source\repos\OnlineEnterpriseExmpl\OnlineEnterpriseOrders.Web:/app
       - C:\Users\anduser\vsdbg\vs2017u5:/remote_debugger:ro
-      - C:\Users\anduser\.nuget\packages\:/root/.nuget/packages:ro
-      - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:/root/.nuget/fallbackpackages:ro
+#$nuget_volume_mapping_onlineenterpriseorders.web$
     entrypoint: tail -f /dev/null
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  bin/Debug/netcoreapp2.2/OnlineEnterpriseOrders.Web.dll"
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_onlineenterpriseorders.web$ bin/Debug/netcoreapp2.2/OnlineEnterpriseOrders.Web.dll"
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "/bin/bash -c \"if PID=$$(pidof -x dotnet); then kill $$PID; fi\""
 
@@ -46,16 +63,15 @@ services:
       target: base
     environment:
       - DOTNET_USE_POLLING_FILE_WATCHER=1
-      - NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_onlineenterpriseproducts.web$
     volumes:
       - C:\Users\anduser\source\repos\OnlineEnterpriseExmpl\OnlineEnterpriseProducts.Web:/app
       - C:\Users\anduser\vsdbg\vs2017u5:/remote_debugger:ro
-      - C:\Users\anduser\.nuget\packages\:/root/.nuget/packages:ro
-      - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:/root/.nuget/fallbackpackages:ro
+#$nuget_volume_mapping_onlineenterpriseproducts.web$
     entrypoint: tail -f /dev/null
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  bin/Debug/netcoreapp2.2/OnlineEnterpriseProducts.Web.dll"
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_onlineenterpriseproducts.web$ bin/Debug/netcoreapp2.2/OnlineEnterpriseProducts.Web.dll"
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "/bin/bash -c \"if PID=$$(pidof -x dotnet); then kill $$PID; fi\""
 

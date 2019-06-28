@@ -16,6 +16,17 @@ services:
     - published: 8081
       target: 8081
     restart: always
+  onlineenterprise.identityserver:
+    build:
+      context: C:\Users\anduser\source\repos\OnlineEnterpriseExmpl
+      dockerfile: OnlineEnterprise.IdentityServer/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+    image: onlineenterprise.identityserver
+    ports:
+    - published: 51493
+      target: 80
   onlineenterprisecategories.web:
     build:
       context: C:\Users\anduser\source\repos\OnlineEnterpriseExmpl

@@ -7,8 +7,10 @@ using OnlineEnterprise.Data.Interfaces;
 using OnlineEnterpriseProducts.Web.ExternalApis;
 using Refit;
 
+
 namespace OnlineEnterprise.Web.Controllers
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase

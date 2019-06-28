@@ -27,6 +27,13 @@ services:
         ports:
             - '51490:80'
 
+    onlineenterprise.identityserver:
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://0.0.0.0:80
+        ports:
+            - '51493:80'
+
     mongo:
         image: mongo
         restart: always

@@ -18,3 +18,9 @@ services:
     build:
       context: .
       dockerfile: OnlineEnterpriseProducts.Web/Dockerfile
+
+  onlineenterprise.identityserver:
+    image: ${DOCKER_REGISTRY-}onlineenterprise.identityserver
+    build:
+      context: .
+      dockerfile: OnlineEnterprise.IdentityServer/Dockerfile

@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -17,6 +19,7 @@ using OnlineEnterprice.Data.Settings;
 using OnlineEnterprice.Domain.Entities;
 using OnlineEnterprise.Data.Interfaces;
 using OnlineEnterprise.Data.Services;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace OnlineEnterPriceCategories.Web
 {
@@ -42,14 +45,31 @@ namespace OnlineEnterPriceCategories.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(options =>
+                {
+                    // auth server base endpoint (will use to search for disco doc)
+                    options.Authority = "http://localhost:51493";
+                    options.ApiName = "categories_api"; // required audience of access tokens
+                    options.RequireHttpsMetadata = false; // dev only!
+                });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
-                    Title = "MyAPI",
-                    Description = "Testing"
+                    Title = "Categories API"
                 });
+
+                c.AddSecurityDefinition("oauth2", new OAuth2Scheme
+                {
+                    Flow = "implicit", // just get token via browser (suitable for swagger SPA)
+                    AuthorizationUrl = "http://localhost:51493/connect/authorize",
+                    Scopes = new Dictionary<string, string> { { "categories_api", "Categories Api - full access" } }
+                });
+
+                c.OperationFilter<AuthorizeCheckOperationFilter>(); // Required to use access token
             });
         }
 
@@ -75,6 +95,34 @@ namespace OnlineEnterPriceCategories.Web
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyAPI");
             });
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyAPI");
+                c.RoutePrefix = string.Empty;
+
+                c.OAuthClientId("categories_api");
+                c.OAuthAppName("Categories Api Swagger");
+            });
+        }
+
+        public class AuthorizeCheckOperationFilter : IOperationFilter
+        {
+            public void Apply(Operation operation, OperationFilterContext context)
+            {
+                var hasAuthorize = context.MethodInfo.DeclaringType.GetCustomAttributes().OfType<AuthorizeAttribute>().Any();
+
+                if (hasAuthorize)
+                {
+                    operation.Responses.Add("401", new Response { Description = "Unauthorized" });
+                    operation.Responses.Add("403", new Response { Description = "Forbidden" });
+
+                    operation.Security = new List<IDictionary<string, IEnumerable<string>>>
+                    {
+                        new Dictionary<string, IEnumerable<string>> {{"oauth2", new[] { "categories_api" } }}
+                    };
+                }
+            }
         }
     }
 }

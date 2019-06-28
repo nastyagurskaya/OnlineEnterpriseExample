@@ -24,3 +24,5 @@
 /OnlineEnterpriseOrders.Web/bin/Debug/netcoreapp2.2
 /OnlineEnterpriseProducts.Web/bin/Debug/netcoreapp2.2
 /OnlineEnterpriseProducts.Web/obj/Container
+/OnlineEnterprise.IdentityServer/obj/Debug/netcoreapp2.2
+/OnlineEnterprise.IdentityServer/obj
