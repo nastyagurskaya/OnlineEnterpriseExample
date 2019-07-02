@@ -94,7 +94,6 @@ namespace OnlineEnterPriceOrders.Web
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyAPI");
-                c.RoutePrefix = string.Empty;
 
                 c.OAuthClientId("orders_api_swagger");
                 c.OAuthAppName("Orders Api Swagger");

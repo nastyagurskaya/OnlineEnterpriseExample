@@ -99,7 +99,6 @@ namespace OnlineEnterPriceCategories.Web
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyAPI");
-                c.RoutePrefix = string.Empty;
 
                 c.OAuthClientId("categories_api");
                 c.OAuthAppName("Categories Api Swagger");

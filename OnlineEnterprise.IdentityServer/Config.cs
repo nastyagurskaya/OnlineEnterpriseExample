@@ -40,7 +40,7 @@ namespace IdentityServer
                     RedirectUris =
                     {
                         "http://localhost:51490/swagger/oauth2-redirect.html",
-                        "http://localhost:51490/o2c.html"
+                        "http://localhost:51490/swagger/index.html"
                     },
                     // scopes that client has access to
                     AllowedScopes = { "products_api",IdentityServerConstants.StandardScopes.OpenId,
@@ -57,7 +57,7 @@ namespace IdentityServer
                     RedirectUris =
                     {
                         "http://localhost:51491/swagger/oauth2-redirect.html",
-                        "http://localhost:51491/o2c.html"
+                        "http://localhost:51491/swagger/index.html"
                     },
                     // scopes that client has access to
                     AllowedScopes = { "orders_api",IdentityServerConstants.StandardScopes.OpenId,
@@ -74,7 +74,7 @@ namespace IdentityServer
                     RedirectUris =
                     {
                         "http://localhost:51492/swagger/oauth2-redirect.html",
-                        "http://localhost:51492/o2c.html"
+                        "http://localhost:51492/swagger/index.html"
                     },
                     // scopes that client has access to
                     AllowedScopes = { "categories_api",IdentityServerConstants.StandardScopes.OpenId,

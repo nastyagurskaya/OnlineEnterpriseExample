@@ -100,7 +100,7 @@ namespace OnlineEnterprise.Web
 
             app.UseHealthChecksUI();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseMvc();
 
@@ -109,7 +109,6 @@ namespace OnlineEnterprise.Web
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Products Api");
-                c.RoutePrefix = string.Empty;
 
                 c.OAuthClientId("products_api_swagger");
                 c.OAuthAppName("Products Api Swagger");
