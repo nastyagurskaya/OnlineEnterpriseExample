@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -16,12 +17,11 @@ namespace OnlineEnterprise.Web.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IMongoRepository<Product> _productRepository;
-        private readonly ICategoryApi _categoryApi;
+        private ICategoryApi _categoryApi;
 
         public ProductsController(IMongoRepository<Product> productRepository)
         {
             _productRepository = productRepository;
-            _categoryApi = RestService.For<ICategoryApi>("http://host.docker.internal:51492");
         }
 
         //[HttpGet]
@@ -30,8 +30,12 @@ namespace OnlineEnterprise.Web.Controllers
         [HttpGet(Name = "GetProductsWithCategoryName")]
         public Dictionary<string, List<Product>> GetProductsWithCategoryName()
         {
+            _categoryApi = RestService.For<ICategoryApi>("http://host.docker.internal:51492", new RefitSettings()
+            {
+                AuthorizationHeaderValueGetter = () => Task.FromResult(Request.Headers["Authorization"].ToString())
+            });
             var products = _productRepository.Get().GroupBy(p => p.Category);
-            return products.ToDictionary(cp => _categoryApi.Get(cp.Key).Result.Name, cp => cp.ToList());
+            return products.ToDictionary(cp => cp.Key == null ? String.Empty : _categoryApi.Get(cp.Key).Result.Name, cp => cp.ToList());
         }
 
         [HttpGet("{id:length(24)}", Name = "GetProduct")]

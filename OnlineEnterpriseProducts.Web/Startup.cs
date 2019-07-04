@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using HealthChecks.UI.Client;
 using IdentityServer4.AccessTokenValidation;
@@ -12,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Logging;
 using OnlineEnterprice.Data.Settings;
 using OnlineEnterprice.Domain.Entities;
 using OnlineEnterprise.Data.Interfaces;
@@ -34,6 +37,7 @@ namespace OnlineEnterprise.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IdentityModelEventSource.ShowPII = true;
             services.Configure<ShopDatabaseSettings>(
                 Configuration.GetSection(nameof(ShopDatabaseSettings)));
 
@@ -54,9 +58,10 @@ namespace OnlineEnterprise.Web
                 .AddIdentityServerAuthentication(options =>
                 {
                     // auth server base endpoint (will use to search for disco doc)
-                    options.Authority = "http://localhost:51493";
+                    options.Authority = "http://host.docker.internal:51493";
                     options.ApiName = "products_api"; // required audience of access tokens
                     options.RequireHttpsMetadata = false; // dev only!
+                  
                 });
 
             services.AddSwaggerGen(c =>
@@ -64,14 +69,18 @@ namespace OnlineEnterprise.Web
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
-                    Title = "Protected Api"
+                    Title = "Products Api"
                 });
 
                 c.AddSecurityDefinition("oauth2", new OAuth2Scheme
                 {
                     Flow = "implicit", // just get token via browser (suitable for swagger SPA)
                     AuthorizationUrl = "http://localhost:51493/connect/authorize",
-                    Scopes = new Dictionary<string, string> { { "products_api", "Products Api - full access" } }
+                    Scopes = new Dictionary<string, string>
+                    {
+                        { "products_api", "Products Api - full access" },
+                        { "categories_api", "Categories Api - full access" }
+                    }
                 });
 
                 c.OperationFilter<AuthorizeCheckOperationFilter>(); // Required to use access token

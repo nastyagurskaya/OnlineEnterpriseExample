@@ -43,8 +43,7 @@ namespace IdentityServer
                         "http://localhost:51490/swagger/index.html"
                     },
                     // scopes that client has access to
-                    AllowedScopes = { "products_api",IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile }
+                    AllowedScopes = { "products_api", "categories_api" }
                 },
                 new Client
                 {
@@ -60,13 +59,13 @@ namespace IdentityServer
                         "http://localhost:51491/swagger/index.html"
                     },
                     // scopes that client has access to
-                    AllowedScopes = { "orders_api",IdentityServerConstants.StandardScopes.OpenId,
+                    AllowedScopes = { "orders_api",  "products_api", IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile }
                 },
                 new Client
                 {
                     ClientId = "categories_api_swagger",
-                    ClientName = "Orders Api Swagger",
+                    ClientName = "Categories Api Swagger",
                     // no interactive user, use the clientid/secret for authentication
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
@@ -77,7 +76,7 @@ namespace IdentityServer
                         "http://localhost:51492/swagger/index.html"
                     },
                     // scopes that client has access to
-                    AllowedScopes = { "categories_api",IdentityServerConstants.StandardScopes.OpenId,
+                    AllowedScopes = { "categories_api", IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile }
                 },
             };

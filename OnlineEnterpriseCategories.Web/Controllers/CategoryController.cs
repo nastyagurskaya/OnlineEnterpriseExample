@@ -10,7 +10,7 @@ using OnlineEnterprise.Data.Services;
 
 namespace OnlineEnterprise.Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase

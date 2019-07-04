@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using OnlineEnterprice.Data.Settings;
 using OnlineEnterprice.Domain.Entities;
@@ -35,6 +36,7 @@ namespace OnlineEnterPriceCategories.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IdentityModelEventSource.ShowPII = true;
             services.Configure<ShopDatabaseSettings>(
                 Configuration.GetSection(nameof(ShopDatabaseSettings)));
 
@@ -49,7 +51,7 @@ namespace OnlineEnterPriceCategories.Web
                 .AddIdentityServerAuthentication(options =>
                 {
                     // auth server base endpoint (will use to search for disco doc)
-                    options.Authority = "http://localhost:51493";
+                    options.Authority = "http://host.docker.internal:51493";
                     options.ApiName = "categories_api"; // required audience of access tokens
                     options.RequireHttpsMetadata = false; // dev only!
                 });
@@ -94,13 +96,8 @@ namespace OnlineEnterPriceCategories.Web
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyAPI");
-            });
 
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyAPI");
-
-                c.OAuthClientId("categories_api");
+                c.OAuthClientId("categories_api_swagger");
                 c.OAuthAppName("Categories Api Swagger");
             });
         }

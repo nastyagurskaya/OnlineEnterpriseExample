@@ -26,3 +26,8 @@
 /OnlineEnterpriseProducts.Web/obj/Container
 /OnlineEnterprise.IdentityServer/obj/Debug/netcoreapp2.2
 /OnlineEnterprise.IdentityServer/obj
+/obj/Docker
+/OnlineEnterpriseCategories.Web/obj/Debug/netcoreapp2.2
+/OnlineEnterpriseCategories.Web/obj
+/OnlineEnterpriseOrders.Web/obj
+/OnlineEnterpriseProducts.Web/obj

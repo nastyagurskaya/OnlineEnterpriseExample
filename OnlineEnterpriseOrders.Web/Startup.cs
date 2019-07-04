@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using OnlineEnterprice.Data.Settings;
 using OnlineEnterprice.Domain.Entities;
@@ -35,6 +36,7 @@ namespace OnlineEnterPriceOrders.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IdentityModelEventSource.ShowPII = true;
             services.Configure<ShopDatabaseSettings>(
                 Configuration.GetSection(nameof(ShopDatabaseSettings)));
 
@@ -49,7 +51,7 @@ namespace OnlineEnterPriceOrders.Web
                 .AddIdentityServerAuthentication(options =>
                 {
                     // auth server base endpoint (will use to search for disco doc)
-                    options.Authority = "http://localhost:51493";
+                    options.Authority = "http://host.docker.internal:51493";
                     options.ApiName = "orders_api"; // required audience of access tokens
                     options.RequireHttpsMetadata = false; // dev only!
                 });
@@ -64,9 +66,14 @@ namespace OnlineEnterPriceOrders.Web
 
                 c.AddSecurityDefinition("oauth2", new OAuth2Scheme
                 {
+                    Type = "oauth2",
                     Flow = "implicit", // just get token via browser (suitable for swagger SPA)
                     AuthorizationUrl = "http://localhost:51493/connect/authorize",
-                    Scopes = new Dictionary<string, string> { { "orders_api", "Orders Api - full access" } }
+                    Scopes = new Dictionary<string, string>
+                    {
+                        { "orders_api", "Orders Api - full access" },
+                        { "products_api", "Products Api - full access" }
+                    }
                 });
 
                 c.OperationFilter<AuthorizeCheckOperationFilter>(); // Required to use access token

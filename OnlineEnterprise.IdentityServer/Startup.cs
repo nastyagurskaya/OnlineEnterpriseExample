@@ -11,7 +11,10 @@ namespace IdentityServer
         {
             services.AddMvc();
 
-            services.AddIdentityServer()
+            services.AddIdentityServer(options =>
+                    {
+                        options.IssuerUri = "http://host.docker.internal:51493";
+                    })
                 .AddTestUsers(TestUsers.Users)
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApis())

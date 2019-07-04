@@ -10,6 +10,7 @@ namespace OnlineEnterpriseProducts.Web.ExternalApis
     public interface ICategoryApi
     {
         [Get("/api/Category/{id}")]
+        [Headers("Authorization: ")]
         Task<Category> Get(string id);
     }
 }
