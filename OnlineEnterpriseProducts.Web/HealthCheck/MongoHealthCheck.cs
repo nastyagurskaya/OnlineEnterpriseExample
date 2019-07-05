@@ -15,15 +15,18 @@ namespace OnlineEnterpriseProducts.Web.HealthCheck
         private static readonly ConcurrentDictionary<MongoClientSettings, MongoClient> _mongoClient = new ConcurrentDictionary<MongoClientSettings, MongoClient>();
         private readonly MongoClientSettings _mongoClientSettings;
         private readonly string _specifiedDatabase;
+
         public MongoHealthCheck(IShopDatabaseSettings settigs, string databaseName = default)
             : this (MongoClientSettings.FromUrl(MongoUrl.Create(settigs.ConnectionString)), databaseName)
         {
         }
+
         public MongoHealthCheck(MongoClientSettings clientSettings, string databaseName = default)
         {
             _specifiedDatabase = databaseName;
             _mongoClientSettings = clientSettings;
         }
+
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
             try

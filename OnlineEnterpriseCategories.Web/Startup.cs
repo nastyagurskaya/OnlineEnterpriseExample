@@ -88,8 +88,11 @@ namespace OnlineEnterPriceCategories.Web
                 //app.UseHsts();
             }
 
+            app.UseAuthentication();
+
             //app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseStaticFiles();
 
             app.UseSwagger();
 

@@ -43,7 +43,8 @@ namespace IdentityServer
                         "http://localhost:51490/swagger/index.html"
                     },
                     // scopes that client has access to
-                    AllowedScopes = { "products_api", "categories_api" }
+                    AllowedScopes = { "products_api", "categories_api" , IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile}
                 },
                 new Client
                 {

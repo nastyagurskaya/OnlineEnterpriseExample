@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEnterprice.Domain.Entities;
 using OnlineEnterprise.Data.Interfaces;
-using OnlineEnterprise.Data.Services;
+using OnlineEnterprise.Domain.Refit.Handlers;
 using OnlineEnterpriseOrders.Web.ExternalApis;
 using Refit;
 
-namespace OnlineEnterprise.Web.Controllers
+namespace OnlineEnterpriseOrders.Web.Controllers
 {
-    //[Microsoft.AspNetCore.Authorization.Authorize]
+    [Microsoft.AspNetCore.Authorization.Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
     {
         private readonly IMongoRepository<Order> _orderRepository;
-        private readonly IProductsApi _productsApi;
+        private IProductsApi _productsApi;
 
         public OrdersController(IMongoRepository<Order> orderRepository)
         {
             _orderRepository = orderRepository;
-            _productsApi = RestService.For<IProductsApi>("http://host.docker.internal:51490");
         }
 
         //[HttpGet]
@@ -31,6 +31,11 @@ namespace OnlineEnterprise.Web.Controllers
         [HttpGet(Name = "GetProductsWithCategoryName")]
         public Dictionary<Order, IEnumerable<Product>> GetProductsWithCategoryName()
         {
+            _productsApi = RestService.For<IProductsApi>(new HttpClient(new AuthenticatedHttpClientHandler(() => Task.FromResult(Request.Headers["Authorization"].ToString())))
+            {
+                BaseAddress = new Uri("http://host.docker.internal:51490")
+            });
+
             Dictionary<Order, IEnumerable<Product>> result = new Dictionary<Order, IEnumerable<Product>>();
             var orders = _orderRepository.Get();
             orders.ForEach(o => result.Add(o, o.Products.Select(prId => _productsApi.Get(prId).Result)));

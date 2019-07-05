@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEnterprice.Domain.Entities;
 using OnlineEnterprise.Data.Interfaces;
-using OnlineEnterprise.Data.Services;
 
-namespace OnlineEnterprise.Web.Controllers
+namespace OnlineEnterpriseCategories.Web.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase

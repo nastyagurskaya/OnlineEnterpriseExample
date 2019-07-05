@@ -9,6 +9,7 @@ namespace OnlineEnterpriseOrders.Web.ExternalApis
 {
     public interface IProductsApi
     {
+        [Headers("Authorization: Bearer")]
         [Get("/api/Products/{id}")]
         Task<Product> Get(string id);
     }

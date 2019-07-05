@@ -3,7 +3,7 @@ using NSubstitute;
 using NUnit.Framework;
 using OnlineEnterprice.Domain.Entities;
 using OnlineEnterprise.Data.Interfaces;
-using OnlineEnterprise.Web.Controllers;
+using OnlineEnterpriseProducts.Web.Controllers;
 
 namespace OnlineEnterprise.Tests
 {

@@ -93,6 +93,8 @@ namespace OnlineEnterPriceOrders.Web
                 //app.UseHsts();
             }
 
+            app.UseAuthentication();
+
             //app.UseHttpsRedirection();
             app.UseMvc();
 

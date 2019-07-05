@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEnterprice.Domain.Entities;
 using OnlineEnterprise.Data.Interfaces;
+using OnlineEnterprise.Domain.Refit.Handlers;
 using OnlineEnterpriseProducts.Web.ExternalApis;
 using Refit;
 
-
-namespace OnlineEnterprise.Web.Controllers
+namespace OnlineEnterpriseProducts.Web.Controllers
 {
     [Microsoft.AspNetCore.Authorization.Authorize]
     [Route("api/[controller]")]
@@ -23,17 +24,12 @@ namespace OnlineEnterprise.Web.Controllers
         {
             _productRepository = productRepository;
         }
-
-        //[HttpGet]
-        //public IEnumerable<Product> Get() => _productRepository.Get();
-
+        
         [HttpGet(Name = "GetProductsWithCategoryName")]
         public Dictionary<string, List<Product>> GetProductsWithCategoryName()
         {
-            _categoryApi = RestService.For<ICategoryApi>("http://host.docker.internal:51492", new RefitSettings()
-            {
-                AuthorizationHeaderValueGetter = () => Task.FromResult(Request.Headers["Authorization"].ToString())
-            });
+            _categoryApi = RestService.For<ICategoryApi>(new HttpClient(new AuthenticatedHttpClientHandler(() => Task.FromResult(Request.Headers["Authorization"].ToString()))) { BaseAddress = new Uri("http://host.docker.internal:51492") });
+
             var products = _productRepository.Get().GroupBy(p => p.Category);
             return products.ToDictionary(cp => cp.Key == null ? String.Empty : _categoryApi.Get(cp.Key).Result.Name, cp => cp.ToList());
         }
